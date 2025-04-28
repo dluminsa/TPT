@@ -416,7 +416,7 @@ if st.session_state.reader:
                     #REMOVE the dead of the reporting month
                     df[ 'Dyear'] = pd.to_numeric(df['Dyear'], errors='coerce')
                     df = df[df['Dyear']==994].copy()
-                    st.write(df.columns)
+                    
                         
                         
 if st.session_state.reader:                                                    
@@ -497,8 +497,10 @@ if st.session_state.reader:# and st.session_state.df:
 
                 #LINE LISTS         
                 df[['Ryear', 'Rmonth', 'Rday']] = df[['Ryear', 'Rmonth', 'Rday']].apply(pd.to_numeric, errors='coerce')
-                st.write(df.columns)
+                
                 line = df[((df['Ryear'] == 2025) & (df['Rmonth'].isin([4,5,6])))].copy()
+                st.write('THIS')
+                st.write(line.columns)
                 tpt = line.copy()
     
                 tpta  = tpt[tpt['TPT'].notna()].copy()
