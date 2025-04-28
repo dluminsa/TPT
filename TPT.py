@@ -531,7 +531,7 @@ if st.session_state.reader:# and st.session_state.df:
                 maytpt = tpt[tpt['Rmonth']==5].shape[0]
                 junetpt = tpt[tpt['Rmonth']==6].shape[0]
                 #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
-                weeks = [15,16,17,18,19,20,21,22,23, 24,25,26]
+                weeks = [28,29,30,31,32,33,34,35,26,37,38,39]
                 st.write(tpt)
                 numb = []
                 nom = []
