@@ -408,6 +408,7 @@ if st.session_state.reader:
                     df24[['Rmonth', 'Rday']] = df24[['Rmonth', 'Rday']].apply(pd.to_numeric, errors='coerce')
                     df24 = df24[((df24['Rmonth']>12) | ((df24['Rmonth']==12) & (df24['Rday']>3)))].copy()
                     df = pd.concat([df25, df24]).copy()
+                    pot = df.shape[0]
         
                     #REMOVE TO of the last reporting month
                     df[ 'Tyear'] = pd.to_numeric(df['Tyear'], errors='coerce')
@@ -504,36 +505,41 @@ if st.session_state.reader:# and st.session_state.df:
                     st.stop()
 
                 #LINE LISTS         
-                line[['Ryear', 'Rmonth', 'Rday']] = line[['Ryear', 'Rmonth', 'Rday']].apply(pd.to_numeric, errors='coerce')
-                line = line[((line['Ryear'] == 2025) & (line['Rmonth'].isin([1,2,3])))].copy()
+                df[['Ryear', 'Rmonth', 'Rday']] = df[['Ryear', 'Rmonth', 'Rday']].apply(pd.to_numeric, errors='coerce')
+                line = df[((df['Ryear'] == 2025) & (df['Rmonth'].isin([4,5,6])))].copy()
                 tpt = line.copy()
     
                 tpta  = tpt[tpt['TPT'].notna()].copy()
                 tptb  = tpt[tpt['TPT'].isnull()].copy()
                 tpta['TPT'] = tpta['TPT'].astype(str)
                 tpta = tpta[tpta['TPT']=='Never'].copy()
-                tpt = pd.concat([tpta, tptb])
+    
+                tpt = pd.concat([tpta, tptb]) #NEVER AND BLANKS
                 month = dt.date.today().strftime('%m')
                 mon = int(month)
+    
                 tpt[['Ayear', 'Amonth']] = tpt[['Ayear', 'Amonth']].apply(pd.to_numeric, errors='coerce')
-                tpta = tpt[((tpt['Ayear'] ==2024) & (tpt['Amonth'].isin([10,11,12])))].copy()
-                tptb = tpt[((tpt['Ayear'] <2024)| ((tpt['Ayear'] ==2024) & (tpt['Amonth']<10)))].copy() #NEXT Q ALL 2024 WILL BE ELIGIBLE
+                tpta = tpt[((tpt['Ayear'] ==2025) & (tpt['Amonth'].isin([1,2,3])))].copy()
+    
+                tptb = tpt[((tpt['Ayear'] <2025)| ((tpt['Ayear'] ==2025) & (tpt['Amonth']<4)))].copy() #NEXT Q ALL 2024 WILL BE ELIGIBLE
+    
                 tpta[['Ayear', 'Rmonth']] = tpta[['Ayear', 'Rmonth']].apply(pd.to_numeric, errors='coerce')
                 tpta['CHECK'] = tpt['Amonth']- tpt['Rmonth'].copy()
                 tpta['CHECK'] = pd.to_numeric(tpta['CHECK'], errors = 'coerce')
                 tpta = tpta[tpta['CHECK']<10].copy()
                 tpt = pd.concat([tpta, tptb])
+    
                 #likely Vs unlikely
                 tpt[['Ayear', 'Amonth']] = tpt[['Ayear', 'Amonth']].apply(pd.to_numeric, errors='coerce')
-                tpta = tpt[((tpt['Ayear']<2024) | ((tpt['Ayear']==2024) & (tpt['Amonth'] <4)))].copy()
-                tptb = tpt[((tpt['Ayear']==2024) & (tpt['Amonth'] >3))].copy()
+                tpta = tpt[((tpt['Ayear']<2024) | ((tpt['Ayear']==2024) & (tpt['Amonth'] <7)))].copy()
+                tptb = tpt[((tpt['Ayear']==2024) & (tpt['Amonth'] >6))].copy()
                 tpta['TPT STATUS'] = 'UNLIKELY'
                 tptb['TPT STATUS'] = 'LIKELY'
                 tpt = pd.concat([tpta, tptb])
                 tpt['Rmonth'] = pd.to_numeric(tpt['Rmonth'], errors = 'coerce')
-                jantpt = tpt[tpt['Rmonth']==1].shape[0]
-                febtpt = tpt[tpt['Rmonth']==2].shape[0]
-                martpt = tpt[tpt['Rmonth']==3].shape[0]
+                aprilpt = tpt[tpt['Rmonth']==4].shape[0]
+                maytpt = tpt[tpt['Rmonth']==5].shape[0]
+                junetpt = tpt[tpt['Rmonth']==6].shape[0]
                 tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
 
                 missed = missed[['A', 'RD','LD']].copy() 
@@ -546,7 +552,7 @@ if st.session_state.reader:# and st.session_state.df:
                 def missedlists():
                     dat = mmm.copy()
                     dat = dat.rename(columns={'LD': 'LAST ENCOUNTER', 'GD':'GENDER','AG':'AGE', 'RD':'RETURN DATE', 'A':'ART No.'})
-                    dat = dat[['ART No.','AGE', 'RETURN DATE','GENDER',  'LAST ENCOUNTER', 'VL STATUS', 'TWOm', 'TPT', 'TPT STATUS', 'CX STATUS']].copy()
+                    dat = dat[['ART No.', 'RETURN DATE',  'LAST ENCOUNTER', 'VL STATUS', 'TWOm', 'TPT', 'TPT STATUS']].copy()
                     return dat
 
                 #SUMMARY LINELIST
