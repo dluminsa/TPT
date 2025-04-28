@@ -310,7 +310,6 @@ if st.session_state.reader:
         
                     #BRINGING BACK THE / IN DATES
                     df['AS'] = df['AS'].astype(str)
-                    df['ARVDO'] = df['ARVDO'].astype(str)
                     df['RD'] = df['RD'].astype(str)
                     df['TO'] = df['TO'].astype(str)
                     
