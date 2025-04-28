@@ -416,6 +416,7 @@ if st.session_state.reader:
                     #REMOVE the dead of the reporting month
                     df[ 'Dyear'] = pd.to_numeric(df['Dyear'], errors='coerce')
                     df = df[df['Dyear']==994].copy()
+                    st.write(df.columns)
                         
                         
 if st.session_state.reader:                                                    
@@ -496,6 +497,7 @@ if st.session_state.reader:# and st.session_state.df:
 
                 #LINE LISTS         
                 df[['Ryear', 'Rmonth', 'Rday']] = df[['Ryear', 'Rmonth', 'Rday']].apply(pd.to_numeric, errors='coerce')
+                st.write(df.columns)
                 line = df[((df['Ryear'] == 2025) & (df['Rmonth'].isin([4,5,6])))].copy()
                 tpt = line.copy()
     
@@ -534,7 +536,7 @@ if st.session_state.reader:# and st.session_state.df:
                 numb = []
                 nom = []
                 for wk in weeks:
-                    tptx = tpt[tpt['RWEEK'] == wk].copy()
+                    tptx = tpt[tpt['RWEEK1'] == wk].copy()
                     tpty = tptx[tptx['TPT STATUS'] == 'UNLIKELY'].copy()
                     nuf = tpty.shape[0]
                     tptx = tptx[tptx['TPT STATUS'] == 'LIKELY'].copy()
