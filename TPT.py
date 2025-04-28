@@ -608,9 +608,9 @@ if st.session_state.reader:# and st.session_state.df:
                                    tot = dat.shape[0]
                                    st.write(f'**YOUR LINELIST HAS {tot} CLIENTS THIS Qtr**')
                                    st.download_button(
-                                                label="TPT",
+                                                label="TPT LINELISTS",
                                                 data=csv_data,
-                                                file_name=f"{facility} TXML.csv",
+                                                file_name=f"{facility} TPT_LINELIST.csv",
                                                 mime="text/csv")
             
                         st.divider()
