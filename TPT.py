@@ -133,8 +133,8 @@ if st.session_state.reader:
                     df = df[df['A']>0].copy()
                     #df.dropna(subset='ART', inplace=True)
                     
-                    df[['AS', 'RD','TO','TI']] = df[['AS', 'RD','TO','TI']].astype(str)
-                    if df['TI'].str.contains('YES').any():
+                    df[['AS', 'RD','TO', 'DD', 'LD']] = df[['AS', 'RD','TO', 'DD', 'LD']].astype(str)
+                    if df['TO'].str.contains('YES').any():
                         st.write("You may be using the Transfer in column instead of the Transfer_in Obs date column")
                         st.stop()
                     
