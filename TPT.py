@@ -456,14 +456,6 @@ if st.session_state.reader:
                         st.rerun()
     
 if st.session_state.reader:# and st.session_state.df:
-                @st.cache_data
-                def yearto6():
-                    dat = newto6.copy()
-                    dat = dat[['ART','AS', 'RD', 'VD']]
-                    dat = dat.rename(columns ={'ART':'ART NO.','AS':'ART START DATE', 'RD':'RETURN DATE', 'VD':'VIRAL LOAD DATE'})
-                    return dat
-
-                row7 = part +list7
                     
                 secrets = st.secrets["connections"]["gsheets"]
                 
