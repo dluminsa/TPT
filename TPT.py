@@ -507,7 +507,6 @@ if st.session_state.reader:# and st.session_state.df:
                 tpta = tpta[tpta['TPT']=='Never'].copy()
     
                 tpt = pd.concat([tpta, tptb]) #NEVER AND BLANKS
-                st.write(tpt.shape[0])
     
                 tpt[['Ayear', 'Amonth']] = tpt[['Ayear', 'Amonth']].apply(pd.to_numeric, errors='coerce')
                 tpta = tpt[((tpt['Ayear'] ==2025) & (tpt['Amonth'].isin([1,2,3])))].copy()
@@ -531,10 +530,8 @@ if st.session_state.reader:# and st.session_state.df:
                 aprilpt = tpt[tpt['Rmonth']==4].shape[0]
                 maytpt = tpt[tpt['Rmonth']==5].shape[0]
                 junetpt = tpt[tpt['Rmonth']==6].shape[0]
-                tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
+                #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
                 weeks = [15,16,17,18,19,20,21,22,23, 24,25,26]
-                st.write('THES')
-                st.write(tpt.columns)
                 numb = []
                 nom = []
                 for wk in weeks:
@@ -547,7 +544,8 @@ if st.session_state.reader:# and st.session_state.df:
                     nom.append (nuf)
                     
                 
-                weekis = numb
+                likely = numb
+                unlikely = nom
                 
                 @st.cache_data
                 def missedlists():
