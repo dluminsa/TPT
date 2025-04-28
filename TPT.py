@@ -559,7 +559,7 @@ if st.session_state.reader:# and st.session_state.df:
                 with col3:
                      submit = st.button('Submit') 
 
-                parts = [cluster, district, facility, aprilpt, maytpt, junept]
+                parts = [cluster, district, facility, aprilpt, maytpt, junetpt]
                 likely1 = parts + likely
                 unlikely1 = parts + unlikely
                
