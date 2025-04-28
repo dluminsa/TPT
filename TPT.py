@@ -602,7 +602,7 @@ if st.session_state.reader:# and st.session_state.df:
                                 if tpt.shape[0] ==0:
                                     st.write('**NO TPT LINELIST**')
                                 else:
-                                   dat = currlost.copy() 
+                                   dat = tpt.copy() 
                                    #dat = tttt.copy()
                                    csv_data = dat.to_csv(index=False)
                                    tot = dat.shape[0]
