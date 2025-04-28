@@ -152,7 +152,6 @@ if st.session_state.reader:
                     
                     df['AS'] = df['AS'].astype(str)
                     df['RD'] = df['RD'].astype(str)
-                    df['TI'] = df['TI'].astype(str)
                     df['TO'] = df['TO'].astype(str)
                     df['DD'] = df['DD'].astype(str)
                     df['LD'] = df['LD'].astype(str)
