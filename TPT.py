@@ -524,9 +524,9 @@ if st.session_state.reader:# and st.session_state.df:
                 tptb = tpt[((tpt['Ayear'] <2025)| ((tpt['Ayear'] ==2025) & (tpt['Amonth']<4)))].copy() #NEXT Q ALL 2024 WILL BE ELIGIBLE
     
                 tpta[['Ayear', 'Rmonth']] = tpta[['Ayear', 'Rmonth']].apply(pd.to_numeric, errors='coerce')
-                tpta['CHECK'] = tpt['Amonth']- tpt['Rmonth'].copy()
+                tpta['CHECK'] = tpt['Rmonth']- tpt['Amonth'].copy()
                 tpta['CHECK'] = pd.to_numeric(tpta['CHECK'], errors = 'coerce')
-                tpta = tpta[tpta['CHECK']<10].copy()
+                tpta = tpta[tpta['CHECK']>2].copy()
                 tpt = pd.concat([tpta, tptb])
     
                 #likely Vs unlikely
@@ -541,18 +541,15 @@ if st.session_state.reader:# and st.session_state.df:
                 maytpt = tpt[tpt['Rmonth']==5].shape[0]
                 junetpt = tpt[tpt['Rmonth']==6].shape[0]
                 tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
+                weeks = [15,16,17,18,19,20,21,22,23, 24,25,26]
+                
 
-                missed = missed[['A', 'RD','LD']].copy() 
-                missed['A'] = pd.to_numeric(missed['A'], errors ='coerce')
-                linebmis['A'] = pd.to_numeric(linebmis['A'], errors ='coerce')
-                missed = pd.merge(linebmis, missed, on = 'A', how = 'left')
-                mmm = missed.copy()
                 
                 @st.cache_data
                 def missedlists():
-                    dat = mmm.copy()
+                    dat = tptcopy()
                     dat = dat.rename(columns={'LD': 'LAST ENCOUNTER', 'GD':'GENDER','AG':'AGE', 'RD':'RETURN DATE', 'A':'ART No.'})
-                    dat = dat[['ART No.', 'RETURN DATE',  'LAST ENCOUNTER', 'VL STATUS', 'TWOm', 'TPT', 'TPT STATUS']].copy()
+                    dat = dat[['ART No.', 'RETURN DATE',  'LAST ENCOUNTER', 'TPT', 'TPT STATUS']].copy()
                     return dat
 
                 #SUMMARY LINELIST
