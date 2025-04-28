@@ -109,7 +109,7 @@ if file is not None and not st.session_state.reader:
                 st.write('Excel accepted, summaries and linelists below will be for this excel')
                 st.write('To change this excel or to upload another excel, first refresh the page')
 #if file is not None and not st.session_state.reader:
-                df = df.rename(columns= {'ART  ':'ART',  'AS  ':'AS', 'RD  ':'RD',  'LD  ': 'LD', 'TO  ':'TO', 'DD  ': 'DD' 'TPT  ':'TPT'})
+                df = df.rename(columns= {'ART  ':'ART',  'AS  ':'AS', 'RD  ':'RD',  'LD  ': 'LD', 'TO  ':'TO', 'DD  ': 'DD', 'TPT  ':'TPT'})
                 df = df.rename(columns= {'ART ':'ART',  'AS ':'AS', 'RD ':'RD',  'LD ': 'LD', 'TO ':'TO', 'DD ': 'DD',  'TPT ':'TPT'})
                 columns = ['ART','AS', 'RD','TO', 'DD','LD','TPT']
                 cols = df.columns.to_list()
