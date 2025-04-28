@@ -2285,21 +2285,21 @@ def extract():
                             st.write('')
                             st.success('**CREATED BY Dr. LUMINSA DESIRE**')
                             st.info('**WITH CONTRIBUTION FROM EDISON KATUNGUKA, SIMON SEMAKULA AND CHRIS MUGARA, FOR THE TWG**')
-pages = {
-    "READER:": [
-        st.Page(extract, title="EMR EXTRACT READER"),
-    ],
-    "VISUALISATION:":[
-        st.Page("TXML_CAMPAIGN.py", title="TXML CAMPAIGN"),],
-        # st.Page("VL_SECTION.py", title="LINELISTS")],
-    "RESOURCES:": [
-        st.Page("SOPs.py", title="SOPs"),
-        st.Page("USER_MANUAL.py", title="USER MANUAL"),
-    ],
-}
+# pages = {
+#     "READER:": [
+#         st.Page(extract, title="EMR EXTRACT READER"),
+#     ],
+#     "VISUALISATION:":[
+#         st.Page("TXML_CAMPAIGN.py", title="TXML CAMPAIGN"),],
+#         # st.Page("VL_SECTION.py", title="LINELISTS")],
+#     "RESOURCES:": [
+#         st.Page("SOPs.py", title="SOPs"),
+#         st.Page("USER_MANUAL.py", title="USER MANUAL"),
+#     ],
+# }
 
-pg = st.navigation(pages)
-pg.run()
+# pg = st.navigation(pages)
+# pg.run()
                                 
     
 
