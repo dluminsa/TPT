@@ -542,8 +542,19 @@ if st.session_state.reader:# and st.session_state.df:
                 junetpt = tpt[tpt['Rmonth']==6].shape[0]
                 tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
                 weeks = [15,16,17,18,19,20,21,22,23, 24,25,26]
+                numb = []
+                nom = []
+                for wk in weeks:
+                    tptx = tpt[tpt['RWEEK'] == wk].copy()
+                    tpty = tptx[tptx['TPT STATUS'] == 'UNLIKELY'].copy()
+                    nuf = tpty.shape[0]
+                    tptx = tptx[tptx['TPT STATUS'] == 'LIKELY'].copy()
+                    nub = tptx.shape[0]
+                    numb.append(nub)
+                    nom.append (nuf)
+                    
                 
-
+                weekis = numb
                 
                 @st.cache_data
                 def missedlists():
@@ -613,6 +624,6 @@ if st.session_state.reader:# and st.session_state.df:
                         st.write('')
                         st.write('')
                         st.success('**@ LUMINSA DESIRE**')
-                        st.info('** @BENSON NASASIRA*')
+                        
 
 
