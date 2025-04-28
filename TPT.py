@@ -7,7 +7,7 @@ from openpyxl import load_workbook
 from pathlib import Path
 import traceback
 import time
-from google.oauth2.service_account import Credentials
+from google.oauth2.service_account import Credentialsrweek1
 from oauth2client.service_account import ServiceAccountCredentials
 from streamlit_gsheets import GSheetsConnection
 from datetime import datetime 
@@ -531,7 +531,7 @@ if st.session_state.reader:# and st.session_state.df:
                 maytpt = tpt[tpt['Rmonth']==5].shape[0]
                 junetpt = tpt[tpt['Rmonth']==6].shape[0]
                 #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
-                weeks = [28,29,30,31,32,33,34,35,36,37,38,39]
+                weeks = [27,28,29,30,31,32,33,34,35,36,37,38,39]
                 st.write(tpt)
                 numb = []
                 nom = []
@@ -580,7 +580,8 @@ if st.session_state.reader:# and st.session_state.df:
                         st.write('FIRST SUBMIT TO SEE LINELISTS AND SUMMARY') 
                         st.markdown(f'**YOU HAVE SELECTED {district} AS THE DISTRICT AND {facility} AS THE FACILITY**')
                         st.write('BE SURE OF THE ABOVE SELECTIONS BEFORE SUBMITTING')                     
-                
+                preva = dfx[dfx['FACILITY']==facility] 
+                prev = preva['Q1'].sum()
                 if not st.session_state.submited:
                     st.stop()  
                 if str(facy) != str(st.session_state.fac):
@@ -598,16 +599,16 @@ if st.session_state.reader:# and st.session_state.df:
                         st.write(f"<h6><b>DOWNLOAD LINELISTS FROM HERE</b></h6>", unsafe_allow_html=True)
                         cola, colb, colc = st.columns(3)
                         with cola:
-                                if lostq ==0:
-                                    st.write('**NO TXML**')
+                                if tpt.shape[0] ==0:
+                                    st.write('**NO TPT LINELIST**')
                                 else:
                                    dat = currlost.copy() 
                                    #dat = tttt.copy()
                                    csv_data = dat.to_csv(index=False)
                                    tot = dat.shape[0]
-                                   st.write(f'**YOUR TXML IS {tot}**')
+                                   st.write(f'**YOUR LINELIST HAS {tot} CLIENTS THIS Qtr**')
                                    st.download_button(
-                                                label="Q2 TXML",
+                                                label="TPT",
                                                 data=csv_data,
                                                 file_name=f"{facility} TXML.csv",
                                                 mime="text/csv")
