@@ -518,6 +518,7 @@ if st.session_state.reader:# and st.session_state.df:
                 tpta['CHECK'] = pd.to_numeric(tpta['CHECK'], errors = 'coerce')
                 tpta = tpta[tpta['CHECK']>2].copy()
                 tpt = pd.concat([tpta, tptb])
+                st.write('HERE')
                 st.write(tptb.shape[0])
                 #likely Vs unlikely
                 tpt[['Ayear', 'Amonth']] = tpt[['Ayear', 'Amonth']].apply(pd.to_numeric, errors='coerce')
