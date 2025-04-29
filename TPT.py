@@ -607,7 +607,7 @@ if st.session_state.reader:# and st.session_state.df:
                                    #dat = tttt.copy()
                                    csv_data = dat.to_csv(index=False)
                                    tot = dat.shape[0]
-                                   st.write(f'**YOUR LINELIST HAS {tot} CLIENTS THIS Qtr**')
+                                   st.write(f'**YOUR LINELIST HAS {tot} CLIENTS THIS QUARTER**')
                                    st.download_button(
                                                 label="TPT LINELISTS",
                                                 data=csv_data,
