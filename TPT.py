@@ -519,6 +519,8 @@ if st.session_state.reader:# and st.session_state.df:
                 tpta['CHECK'] = tpta['Rmonth']- tpta['Amonth'].copy()
                 tpta['CHECK'] = pd.to_numeric(tpta['CHECK'], errors = 'coerce')
                 tpta = tpta[tpta['CHECK']>2].copy()
+                st.write(f'A {tpta.shape[0]})
+                st.write(f'B {tptb.shape[0]})
                 tpt = pd.concat([tpta, tptb])
                 ssd = tpt.copy()
                 st.write('HEMRET')
