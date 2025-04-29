@@ -514,7 +514,7 @@ if st.session_state.reader:# and st.session_state.df:
                 tptb = tpt[((tpt['Ayear'] <2025)| ((tpt['Ayear'] ==2025) & (tpt['Amonth']<4)))].copy() #NEXT Q ALL 2024 WILL BE ELIGIBLE
                 
                 tpta[['Ayear', 'Rmonth']] = tpta[['Ayear', 'Rmonth']].apply(pd.to_numeric, errors='coerce')
-                tpta['CHECK'] = tpt['Rmonth']- tpt['Amonth'].copy()
+                tpta['CHECK'] = tpta['Rmonth']- tpta['Amonth'].copy()
                 tpta['CHECK'] = pd.to_numeric(tpta['CHECK'], errors = 'coerce')
                 tpta = tpta[tpta['CHECK']>2].copy()
                 tpt = pd.concat([tpta, tptb])
