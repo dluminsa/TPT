@@ -509,7 +509,7 @@ if st.session_state.reader:# and st.session_state.df:
                 tpt = pd.concat([tpta, tptb]) #NEVER AND BLANKS
                 st.write('SHIT')
                 st.write(tpt.shape[0])
-    
+             
                 tpt[['Ayear', 'Amonth']] = tpt[['Ayear', 'Amonth']].apply(pd.to_numeric, errors='coerce')
                 tpta = tpt[((tpt['Ayear'] ==2025) & (tpt['Amonth'].isin([1,2,3])))].copy()
     
@@ -519,26 +519,31 @@ if st.session_state.reader:# and st.session_state.df:
                 tpta['CHECK'] = tpta['Rmonth']- tpta['Amonth'].copy()
                 tpta['CHECK'] = pd.to_numeric(tpta['CHECK'], errors = 'coerce')
                 tpta = tpta[tpta['CHECK']>2].copy()
-                st.write(f'A {tpta.shape[0]})
-                st.write(f'B {tptb.shape[0]})
                 tpt = pd.concat([tpta, tptb])
-                ssd = tpt.copy()
-                st.write('HEMRET')
-                st.write(tpt.shape[0])
                 #likely Vs unlikely
                 tpt[['Ayear', 'Amonth']] = tpt[['Ayear', 'Amonth']].apply(pd.to_numeric, errors='coerce')
                 tpta = tpt[((tpt['Ayear']<2024) | ((tpt['Ayear']==2024) & (tpt['Amonth'] <7)))].copy()
                 tptb = tpt[((tpt['Ayear']==2024) & (tpt['Amonth'] >6))].copy()
+    
                 tpta['TPT STATUS'] = 'UNLIKELY'
+                tpta['Rmonth'] = pd.to_numeric(tpta['Rmonth'], errors = 'coerce')
+                aprilpt2 = tpta[tpta['Rmonth']==4].shape[0]
+                maytpt2 = tpta[tpta['Rmonth']==5].shape[0]
+                junetpt2 = tpta[tpta['Rmonth']==6].shape[0]
+    
                 tptb['TPT STATUS'] = 'LIKELY'
+                tptb['Rmonth'] = pd.to_numeric(tptb['Rmonth'], errors = 'coerce')
+                aprilpt = tptb[tptb['Rmonth']==4].shape[0]
+                maytpt = tptb[tptb['Rmonth']==5].shape[0]
+                junetpt = tptb[tptb['Rmonth']==6].shape[0]
                 tptd = pd.concat([tpta, tptb])
-                tptd['Rmonth'] = pd.to_numeric(tptd['Rmonth'], errors = 'coerce')
+                
                 aprilpt = tptd[tptd['Rmonth']==4].shape[0]
                 maytpt = tptd[tptd['Rmonth']==5].shape[0]
                 junetpt = tptd[tptd['Rmonth']==6].shape[0]
                 #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
                 weeks = [27,28,29,30,31,32,33,34,35,36,37,38,39]
-                tptq = tptd.copy()
+            
                 st.write(tptd.shape[0])
                 numb = []
                 nom = []
@@ -551,7 +556,7 @@ if st.session_state.reader:# and st.session_state.df:
                     numb.append(nub)
                     nom.append (nuf)
                     
-                
+            
                 likely = numb
                 unlikely = nom
                 
@@ -607,7 +612,7 @@ if st.session_state.reader:# and st.session_state.df:
                                 if tpt.shape[0] ==0:
                                     st.write('**NO TPT LINELIST**')
                                 else:
-                                   dat =  tptq.copy() 
+                                   dat =  tptd.copy() 
                                    #dat = tttt.copy()
                                    csv_data = dat.to_csv(index=False)
                                    tot = dat.shape[0]
