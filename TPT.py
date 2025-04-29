@@ -532,6 +532,7 @@ if st.session_state.reader:# and st.session_state.df:
                 junetpt = tptd[tptd['Rmonth']==6].shape[0]
                 #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
                 weeks = [27,28,29,30,31,32,33,34,35,36,37,38,39]
+                tptq = tptd.copy()
                 st.write(tptd)
                 numb = []
                 nom = []
@@ -550,7 +551,7 @@ if st.session_state.reader:# and st.session_state.df:
                 
                 @st.cache_data
                 def missedlists():
-                    dat = tptcopy()
+                    dat = tptq.copy()
                     dat = dat.rename(columns={'LD': 'LAST ENCOUNTER', 'GD':'GENDER','AG':'AGE', 'RD':'RETURN DATE', 'A':'ART No.'})
                     dat = dat[['ART No.', 'RETURN DATE',  'LAST ENCOUNTER', 'TPT', 'TPT STATUS']].copy()
                     return dat
@@ -602,7 +603,7 @@ if st.session_state.reader:# and st.session_state.df:
                                 if tpt.shape[0] ==0:
                                     st.write('**NO TPT LINELIST**')
                                 else:
-                                   dat = tpt.copy() 
+                                   dat = tptq.copy() 
                                    #dat = tttt.copy()
                                    csv_data = dat.to_csv(index=False)
                                    tot = dat.shape[0]
