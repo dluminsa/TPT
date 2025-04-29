@@ -521,7 +521,7 @@ if st.session_state.reader:# and st.session_state.df:
                 #likely Vs unlikely
                 tpt[['Ayear', 'Amonth']] = tpt[['Ayear', 'Amonth']].apply(pd.to_numeric, errors='coerce')
                 tpta = tpt[((tpt['Ayear']<2024) | ((tpt['Ayear']==2024) & (tpt['Amonth'] <7)))].copy()
-                tptb = tpt[((tpt['Ayear']==2024) & (tpt['Amonth'] >6))].copy()
+                tptb = tpt[((tpt['Ayear']>2024) |((tpt['Ayear']==2024) & (tpt['Amonth'] >6)))].copy()
     
                 tpta['TPT STATUS'] = 'UNLIKELY'
                 tpta['Rmonth'] = pd.to_numeric(tpta['Rmonth'], errors = 'coerce')
