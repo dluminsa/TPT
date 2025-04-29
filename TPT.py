@@ -539,7 +539,7 @@ if st.session_state.reader:# and st.session_state.df:
                 #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
                 weeks = [27,28,29,30,31,32,33,34,35,36,37,38,39]
                 tptq = tptd.copy()
-                st.write(tptd)
+                st.write(tptd.shape[0])
                 numb = []
                 nom = []
                 for wk in weeks:
@@ -555,12 +555,9 @@ if st.session_state.reader:# and st.session_state.df:
                 likely = numb
                 unlikely = nom
                 
-                @st.cache_data
-                def missedlists():
-                    dat = tptq.copy()
-                    dat = dat.rename(columns={'LD': 'LAST ENCOUNTER', 'GD':'GENDER','AG':'AGE', 'RD':'RETURN DATE', 'A':'ART No.'})
-                    dat = dat[['ART No.', 'RETURN DATE',  'LAST ENCOUNTER', 'TPT', 'TPT STATUS']].copy()
-                    return dat
+                dat = tptd.rename(columns={'LD': 'LAST ENCOUNTER', 'GD':'GENDER','AG':'AGE', 'RD':'RETURN DATE', 'A':'ART No.'})
+                dat = dat[['ART No.', 'RETURN DATE',  'LAST ENCOUNTER', 'TPT', 'TPT STATUS']].copy()
+                   
 
                 #SUMMARY LINELIST
                 col1,col2,col3 = st.columns([1,2,1])
@@ -568,8 +565,9 @@ if st.session_state.reader:# and st.session_state.df:
                      submit = st.button('Submit') 
 
                 parts = [cluster, district, facility, aprilpt, maytpt, junetpt]
+                parts2 = [cluster, district, facility, aprilpt2, maytpt2, junetpt2]
                 likely1 = parts + likely
-                unlikely1 = parts + unlikely
+                unlikely1 = parts2 + unlikely
                
     
                 if submit:
@@ -609,7 +607,7 @@ if st.session_state.reader:# and st.session_state.df:
                                 if tpt.shape[0] ==0:
                                     st.write('**NO TPT LINELIST**')
                                 else:
-                                   dat =  ssd.copy() 
+                                   dat =  tptq.copy() 
                                    #dat = tttt.copy()
                                    csv_data = dat.to_csv(index=False)
                                    tot = dat.shape[0]
