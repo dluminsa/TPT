@@ -532,11 +532,11 @@ if st.session_state.reader:# and st.session_state.df:
                 junetpt = tptd[tptd['Rmonth']==6].shape[0]
                 #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
                 weeks = [27,28,29,30,31,32,33,34,35,36,37,38,39]
-                st.write(tpt)
+                st.write(tptd)
                 numb = []
                 nom = []
                 for wk in weeks:
-                    tptx = tpt[tpt['RWEEK1'] == wk].copy()
+                    tptx = tptd[tptd['RWEEK1'] == wk].copy()
                     tpty = tptx[tptx['TPT STATUS'] == 'UNLIKELY'].copy()
                     nuf = tpty.shape[0]
                     tptx = tptx[tptx['TPT STATUS'] == 'LIKELY'].copy()
