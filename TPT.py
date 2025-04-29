@@ -511,7 +511,7 @@ if st.session_state.reader:# and st.session_state.df:
                 tpt[['Ayear', 'Amonth']] = tpt[['Ayear', 'Amonth']].apply(pd.to_numeric, errors='coerce')
                 tpta = tpt[((tpt['Ayear'] ==2025) & (tpt['Amonth'].isin([1,2,3])))].copy()
     
-                tptb = tpt[((tpt['Ayear'] <2025)| ((tpt['Ayear'] ==2025) & (tpt['Amonth']<4)))].copy() #NEXT Q ALL 2024 WILL BE ELIGIBLE
+                tptb = tpt[((tpt['Ayear'] <2025)| ((tpt['Ayear'] ==2025) & (tpt['Amonth']<1)))].copy() #NEXT Q ALL 2024 WILL BE ELIGIBLE
                 
                 tpta[['Ayear', 'Rmonth']] = tpta[['Ayear', 'Rmonth']].apply(pd.to_numeric, errors='coerce')
                 tpta['CHECK'] = tpta['Rmonth']- tpta['Amonth'].copy()
@@ -519,7 +519,7 @@ if st.session_state.reader:# and st.session_state.df:
                 tpta = tpta[tpta['CHECK']>2].copy()
                 tpt = pd.concat([tpta, tptb])
                 ssd = tpt.copy()
-                st.write('HEMRE')
+                st.write('HEMRET')
                 st.write(tpt.shape[0])
                 #likely Vs unlikely
                 tpt[['Ayear', 'Amonth']] = tpt[['Ayear', 'Amonth']].apply(pd.to_numeric, errors='coerce')
