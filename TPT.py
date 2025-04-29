@@ -512,7 +512,7 @@ if st.session_state.reader:# and st.session_state.df:
                 tpta = tpt[((tpt['Ayear'] ==2025) & (tpt['Amonth'].isin([1,2,3])))].copy()
     
                 tptb = tpt[((tpt['Ayear'] <2025)| ((tpt['Ayear'] ==2025) & (tpt['Amonth']<4)))].copy() #NEXT Q ALL 2024 WILL BE ELIGIBLE
-    
+                st.write(tptb.shape[0])
                 tpta[['Ayear', 'Rmonth']] = tpta[['Ayear', 'Rmonth']].apply(pd.to_numeric, errors='coerce')
                 tpta['CHECK'] = tpt['Rmonth']- tpt['Amonth'].copy()
                 tpta['CHECK'] = pd.to_numeric(tpta['CHECK'], errors = 'coerce')
@@ -525,11 +525,11 @@ if st.session_state.reader:# and st.session_state.df:
                 tptb = tpt[((tpt['Ayear']==2024) & (tpt['Amonth'] >6))].copy()
                 tpta['TPT STATUS'] = 'UNLIKELY'
                 tptb['TPT STATUS'] = 'LIKELY'
-                tpt = pd.concat([tpta, tptb])
-                tpt['Rmonth'] = pd.to_numeric(tpt['Rmonth'], errors = 'coerce')
-                aprilpt = tpt[tpt['Rmonth']==4].shape[0]
-                maytpt = tpt[tpt['Rmonth']==5].shape[0]
-                junetpt = tpt[tpt['Rmonth']==6].shape[0]
+                tptd = pd.concat([tpta, tptb])
+                tptd['Rmonth'] = pd.to_numeric(tptd['Rmonth'], errors = 'coerce')
+                aprilpt = tptd[tptd['Rmonth']==4].shape[0]
+                maytpt = tptd[tptd['Rmonth']==5].shape[0]
+                junetpt = tptd[tptd['Rmonth']==6].shape[0]
                 #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
                 weeks = [27,28,29,30,31,32,33,34,35,36,37,38,39]
                 st.write(tpt)
