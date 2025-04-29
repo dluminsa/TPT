@@ -507,6 +507,8 @@ if st.session_state.reader:# and st.session_state.df:
                 tpta = tpta[tpta['TPT']=='Never'].copy()
     
                 tpt = pd.concat([tpta, tptb]) #NEVER AND BLANKS
+                st.write('SHIT')
+                st.write(tpt.shape[0])
     
                 tpt[['Ayear', 'Amonth']] = tpt[['Ayear', 'Amonth']].apply(pd.to_numeric, errors='coerce')
                 tpta = tpt[((tpt['Ayear'] ==2025) & (tpt['Amonth'].isin([1,2,3])))].copy()
