@@ -534,13 +534,7 @@ if st.session_state.reader:# and st.session_state.df:
                 aprilpt = tptb[tptb['Rmonth']==4].shape[0]
                 maytpt = tptb[tptb['Rmonth']==5].shape[0]
                 junetpt = tptb[tptb['Rmonth']==6].shape[0]
-                tptd = pd.concat([tpta, tptb])
-                st.write('shot')
-                st.write(tptd.shape[0])
-                st.write('a')
-                st.write(tpta.shape[0])
-                st.write('b')
-                st.write(tptb.shape[0])         
+                tptd = pd.concat([tpta, tptb])         
                 
       
                 #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
@@ -561,8 +555,9 @@ if st.session_state.reader:# and st.session_state.df:
                 likely = numb
                 unlikely = nom
                 
-                dat = tptd.rename(columns={'LD': 'LAST ENCOUNTER', 'GD':'GENDER','AG':'AGE', 'RD':'RETURN DATE', 'A':'ART No.'})
-                dat = dat[['ART No.', 'RETURN DATE',  'LAST ENCOUNTER', 'TPT', 'TPT STATUS']].copy()
+                dat = tptd.rename(columns={'LD': 'LAST ENCOUNTER', 'GD':'GENDER','AG':'AGE', 'RD':'RETURN DATE', 'A':'ART No.','TPT STATUS':'LIKELIHOOD'})
+                dat = dat.rename(columns={'TPT': 'TPT STATUS'})
+                dat = dat[['ART No.', 'RETURN DATE',  'LAST ENCOUNTER', 'TPT STATUS','LIKELIHOOD']].copy()
                    
 
                 #SUMMARY LINELIST
@@ -608,7 +603,7 @@ if st.session_state.reader:# and st.session_state.df:
                         else:
                             pass 
                         st.write(f"<h6><b>DOWNLOAD LINELISTS FROM HERE</b></h6>", unsafe_allow_html=True)
-                        cola, colb, colc = st.columns(3)
+                        cola, colb = st.columns(2)
                         with cola:
                                 if tpt.shape[0] ==0:
                                     st.write('**NO TPT LINELIST**')
