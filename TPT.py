@@ -537,7 +537,10 @@ if st.session_state.reader:# and st.session_state.df:
                 tptd = pd.concat([tpta, tptb])
                 st.write('shot')
                 st.write(tptd.shape[0])
-                         
+                st.write('a')
+                st.write(tpta.shape[0])
+                st.write('b')
+                st.write(tptb.shape[0])         
                 
       
                 #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
