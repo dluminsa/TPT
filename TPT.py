@@ -518,6 +518,7 @@ if st.session_state.reader:# and st.session_state.df:
                 tpta['CHECK'] = pd.to_numeric(tpta['CHECK'], errors = 'coerce')
                 tpta = tpta[tpta['CHECK']>2].copy()
                 tpt = pd.concat([tpta, tptb])
+                ssd = tpt.copy()
                 st.write('HERE')
                 st.write(tpt.shape[0])
                 #likely Vs unlikely
@@ -604,11 +605,11 @@ if st.session_state.reader:# and st.session_state.df:
                                 if tpt.shape[0] ==0:
                                     st.write('**NO TPT LINELIST**')
                                 else:
-                                   dat = tptq.copy() 
+                                   dat =  ssd.copy() 
                                    #dat = tttt.copy()
                                    csv_data = dat.to_csv(index=False)
                                    tot = dat.shape[0]
-                                   st.write(f'**YOUR LINELIST HAS {tot} CLIENTS THIS QUARTER**')
+                                   st.write(f'**YOUR LINELIST HAS {tot} CLIENTS THIS Qtr**')
                                    st.download_button(
                                                 label="TPT LINELISTS",
                                                 data=csv_data,
