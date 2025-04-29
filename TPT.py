@@ -535,10 +535,11 @@ if st.session_state.reader:# and st.session_state.df:
                 maytpt = tptb[tptb['Rmonth']==5].shape[0]
                 junetpt = tptb[tptb['Rmonth']==6].shape[0]
                 tptd = pd.concat([tpta, tptb])
+                st.write('shot')
+                st.write(tptd.shape[0])
+                         
                 
-                aprilpt = tptd[tptd['Rmonth']==4].shape[0]
-                maytpt = tptd[tptd['Rmonth']==5].shape[0]
-                junetpt = tptd[tptd['Rmonth']==6].shape[0]
+      
                 #tpt = tpt[['A', 'TPT STATUS']] # GET RD,AS,RDAY,RMONTH, AFTER MERGING
                 weeks = [27,28,29,30,31,32,33,34,35,36,37,38,39]
             
